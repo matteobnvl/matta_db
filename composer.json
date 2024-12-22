@@ -1,0 +1,24 @@
+{
+    "name": "matteobnvl/matta_db",
+    "description": "Matta DB est une extension au framework MATTA PHP, cette extension va permettre de créer et d'exécuter un système de migration comlet et facilement.",
+    "type": "library",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Matteobnvl\\MattaDb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "matteobnvl",
+            "email": "matteobonneval19@gmail.com"
+        }
+    ],
+    "bin": [
+        "src/init.php",
+        "src/create.php",
+        "src/migrate.php"
+    ]
+}
