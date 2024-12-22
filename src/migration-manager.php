@@ -18,7 +18,7 @@ function migrateUp($pdo)
     $appliedMigrations = getAppliedMigrations($pdo);
 
     $files = scandir($migrationsPath);
-    $migrations = array_diff($files, ['.', '..']); // Filtrer les fichiers système
+    $migrations = array_diff($files, ['.', '..']);
 
     foreach ($migrations as $migration) {
         if (!in_array($migration, $appliedMigrations)) {
@@ -36,7 +36,6 @@ function migrateUp($pdo)
     }
 }
 
-// Fonction pour annuler la dernière migration appliquée
 function migrateDown($pdo)
 {
     $lastMigration = getLastAppliedMigration($pdo);
@@ -60,25 +59,25 @@ function migrateDown($pdo)
 
 function getAppliedMigrations($pdo)
 {
-    $stmt = $pdo->query("SELECT migration FROM migrations");
+    $stmt = $pdo->query("SELECT migration_logs FROM migrations");
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
 function recordMigration($pdo, $migration)
 {
-    $stmt = $pdo->prepare("INSERT INTO migrations (migration) VALUES (:migration)");
+    $stmt = $pdo->prepare("INSERT INTO migrations_logs (migration) VALUES (:migration)");
     $stmt->execute(['migration' => $migration]);
 }
 
 function removeMigrationRecord($pdo, $migration)
 {
-    $stmt = $pdo->prepare("DELETE FROM migrations WHERE migration = :migration");
+    $stmt = $pdo->prepare("DELETE FROM migrations_logs WHERE migration = :migration");
     $stmt->execute(['migration' => $migration]);
 }
 
 function getLastAppliedMigration($pdo)
 {
-    $stmt = $pdo->query("SELECT migration FROM migrations ORDER BY id DESC LIMIT 1");
+    $stmt = $pdo->query("SELECT migration FROM migrations_logs ORDER BY id DESC LIMIT 1");
     return $stmt->fetchColumn();
 }
 
