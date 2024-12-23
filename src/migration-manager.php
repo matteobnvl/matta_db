@@ -2,7 +2,8 @@
 
 require_once 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$projectRoot = dirname(__DIR__, 4);
+$dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
 $dotenv->load();
 
 $dsn = "mysql:host=". $_ENV['DB_HOST'] .";dbname=". $_ENV['DB_NAME'] .";";
