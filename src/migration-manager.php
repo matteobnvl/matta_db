@@ -15,7 +15,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 function migrateUp($pdo)
 {
-    $migrationsPath = __DIR__ . '/../migrations';
+    $migrationsPath = dirname(__DIR__, 4) . '/migrations';
     $appliedMigrations = getAppliedMigrations($pdo);
 
     $files = scandir($migrationsPath);
@@ -42,7 +42,7 @@ function migrateDown($pdo)
     $lastMigration = getLastAppliedMigration($pdo);
 
     if ($lastMigration) {
-        $migrationFile = __DIR__ . '/../migrations/' . $lastMigration;
+        $migrationFile = dirname(__DIR__, 4) . '/migrations' . $lastMigration;
         require_once $migrationFile;
 
         $className = pathinfo($lastMigration, PATHINFO_FILENAME);
@@ -89,5 +89,5 @@ if ($action === 'up') {
 } elseif ($action === 'down') {
     migrateDown($pdo);
 } else {
-    echo "Usage : php migrations_manager.php [up|down]\n";
+    echo "Usage : php migration-manager.php [up|down]\n";
 }
