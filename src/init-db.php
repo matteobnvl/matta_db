@@ -33,45 +33,11 @@ try {
 
     if (!is_dir('migrations')) {
         mkdir('migrations', 0777, true);
-        echo "Le dossier 'migrations' a été créé.\n";
+        echo "Le dossier 'migrations' a été créé.\n\n";
     } else {
-        echo "Le dossier 'migrations' existe déjà.\n";
+        echo "Le dossier 'migrations' existe déjà.\n\n\n";
     }
-
-    $timestamp = time();
-    $migrationFilename = 'migrations/' . $timestamp . '.php';
-    $migrationContent = <<<PHP
-<?php
-
-class $timestamp
-{
-    private \$pdo;
-
-    public function __construct(\$pdo)
-    {
-        \$this->pdo = \$pdo;
-    }
-
-    public function up()
-    {
-        \$sql = "CREATE TABLE example (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(255) NOT NULL
-        )";
-        \$this->pdo->exec(\$sql);
-    }
-
-    public function down()
-    {
-        \$sql = "DROP TABLE IF EXISTS example";
-        \$this->pdo->exec(\$sql);
-    }
-}
-
-PHP;
-
-    file_put_contents($migrationFilename, $migrationContent);
-    echo "Le fichier de migration par défaut '$migrationFilename' a été créé.\n";
+    echo "Lancer la commande composer migration:create pour créer une migration.\n"
 
 } catch (PDOException $e) {
     echo $e;

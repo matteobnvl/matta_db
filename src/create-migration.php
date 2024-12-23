@@ -2,7 +2,7 @@
 
 $timestamp = time();
 $filename = 'Migration'.$timestamp;
-$migrationFilename = __DIR__ . "/../migrations/{$filename}.php";
+$migrationFilename = dirname(__DIR__, 4) . "/migrations/{$filename}.php";
 
 $migrationContent = <<<PHP
 <?php
