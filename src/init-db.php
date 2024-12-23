@@ -37,7 +37,7 @@ try {
     } else {
         echo "Le dossier 'migrations' existe déjà.\n\n\n";
     }
-    echo "Lancer la commande composer migration:create pour créer une migration.\n"
+    echo "Lancer la commande composer migration:create pour créer une migration.\n";
 
 } catch (PDOException $e) {
     echo $e;
