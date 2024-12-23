@@ -60,7 +60,7 @@ function migrateDown($pdo)
 
 function getAppliedMigrations($pdo)
 {
-    $stmt = $pdo->query("SELECT migration_logs FROM migrations");
+    $stmt = $pdo->query("SELECT migration FROM migrations_logs");
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
