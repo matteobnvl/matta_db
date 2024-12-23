@@ -25,8 +25,8 @@
         "src/migration-manager.php"
     ],
     "scripts": {
-    "migrate:init": "php vendor/matta/db/src/init.php",
-    "migrate:create": "php vendor/matta/db/src/create.php",
-    "migrate:run": "php vendor/matta/db/src/migrate.php"
+    "migrate:init": "php vendor/matta/db/src/init-db.php",
+    "migrate:create": "php vendor/matta/db/src/create-migration.php",
+    "migrate:run": "php vendor/matta/db/src/migration-manager.php"
     }
 }
